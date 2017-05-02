@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Auth::routes();
 
 // Joystick Administration
@@ -25,6 +14,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('news', 'Joystick\NewController');
     Route::resource('languages', 'Joystick\LanguageController');
     Route::resource('options', 'Joystick\OptionController');
+    Route::resource('orders', 'Joystick\OrdersController');
     Route::resource('pages', 'Joystick\PageController');
     Route::resource('products', 'Joystick\ProductController');
 
@@ -40,19 +30,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 Route::get('/', 'MainController@index');
 
-Route::get('test', function(){
-    if( \Session::has( 'items' ) ) {
-        echo \Session::get( 'items' );
-    } else {
-        echo \Session::put( 'items', 'first', 10 );
-        echo 'items was forgotten, so this is just random data';
-    }
-});
-
-// Search tools
 Route::get('search', 'InputController@search');
 
 Route::get('cart/{id}', 'InputController@addToCart');
+
+Route::get('cart', 'InputController@cart');
+
+Route::get('basket', 'InputController@basket');
+
+Route::delete('basket/{id}', 'InputController@destroy');
 
 Route::get('catalog', 'MainController@catalog');
 

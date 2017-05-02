@@ -21,26 +21,30 @@
   <div class="container page"><!-- Товары -->
     <h1>Продукция</h1>
     <?php $items = session('items'); ?>
-    @foreach ($products as $product)
-      @if(in_array($product->id, $items['product_ids']))
-        <div class="col-md-3 col-sm-6 goods">
-          <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
-            <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
-            <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
-          </a>
-          <span class="good-more">Подробнее</span>
-          <a class="btn btn-default" href="/bakset"><img src="/img/shopping-cart.png"> </a>
-        </div>
-      @else
-        <div class="col-md-3 col-sm-6 goods">
-          <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
-            <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
-            <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
-          </a>
-          <span class="good-more">Подробнее</span>
-          <button class="btn btn-primary" id="add-to-cart" data-id="{{ $product->id }}" type="button">Купить</button>
-        </div>
-      @endif
+    @foreach ($products->chunk(4) as $chunk)
+      <div class="row">
+        @foreach ($chunk as $product)
+          @if(is_array($items) AND in_array($product->id, $items['product_ids']))
+            <div class="col-md-3 col-sm-6 goods">
+              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
+                <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
+                <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
+              </a>
+              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" class="btn good-more">Подробнее</a>
+              <a href="/basket" class="btn btn-cart" data-toggle="tooltip" data-placement="top" title="Перейти в корзину"><img src="/img/shopping-cart.png"></a>
+            </div>
+          @else
+            <div class="col-md-3 col-sm-6 goods">
+              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
+                <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
+                <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
+              </a>
+              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" class="btn good-more">Подробнее</a>
+              <button class="btn btn-buy" id="add-to-cart" data-id="{{ $product->id }}" type="button">Купить</button>
+            </div>
+          @endif
+        @endforeach
+      </div>
     @endforeach
   </div>
 
@@ -79,7 +83,6 @@
 
 @section('scripts')
   <script>
-
     $('button#add-to-cart').click(function(e){
       e.preventDefault();
 
@@ -93,12 +96,18 @@
           data: {},
           success: function(data) {
             console.log(data);
-            // alert(data.alert);
+            $('*[data-id="'+productId+'"]').replaceWith('<a href="/basket" class="btn btn-cart" data-toggle="tooltip" data-placement="top" title="Перейти в корзину"><img src="/img/shopping-cart.png"></a>');
+            $('#count-items').text(data.countItems);
+            alert('Товар добавлен в корзину');
           }
         });
       } else {
-        alert("Введите сообщение");
+        alert("Ошибка сервера");
       }
     });
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   </script>
 @endsection

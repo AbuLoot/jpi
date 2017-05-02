@@ -32,6 +32,11 @@ class InputController extends Controller
         return view('site.found', compact('text', 'news', 'products'));
     }
 
+    public function cart()
+    {
+        Session::forget('items');
+    }
+
     public function addToCart(Request $request, $id)
     {
         if (Session::has('items')) {
@@ -40,9 +45,11 @@ class InputController extends Controller
 
             $items['product_ids'][$id] = $id;
 
+            $count = count($items['product_ids']);
+
             Session::set('items', $items);
 
-            return response()->json(['alert' => 'Товар обновлен', 'arr' => Session::get('items')]);
+            return response()->json(['alert' => 'Товар обновлен', 'countItems' => $count]);
         }
 
         $items = [];
@@ -50,6 +57,25 @@ class InputController extends Controller
 
         Session::set('items', $items);
 
-        return response()->json(['alert' => 'Товар добавлен', 'arr' => Session::get('items')]);
+        return response()->json(['alert' => 'Товар добавлен', 'countItems' => 1]);
+    }
+
+    public function basket()
+    {
+        $items = Session::get('items');
+        $products = Product::whereIn('id', $items['product_ids'])->get();
+
+        return view('site.basket', compact('products'));
+    }
+
+    public function destroy($id)
+    {
+        $items = Session::get('items');
+
+        unset($items['product_ids'][$id]);
+
+        Session::set('items', $items);
+
+        return redirect('basket');
     }
 }

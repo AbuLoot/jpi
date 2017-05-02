@@ -98,6 +98,7 @@ class ProductController extends Controller
         $product->count = $request->count;
         $product->condition = $request->condition;
         $product->presense = $request->presense;
+        $product->meta_description = $request->meta_description;
         $product->description = $request->description;
         $product->characteristic = $request->characteristic;
         $product->image = $introImage;
@@ -210,6 +211,7 @@ class ProductController extends Controller
         $product->count = $request->count;
         $product->condition = $request->condition;
         $product->presense = $request->presense;
+        $product->meta_description = $request->meta_description;
         $product->description = $request->description;
         $product->characteristic = $request->characteristic;
 

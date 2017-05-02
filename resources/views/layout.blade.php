@@ -56,7 +56,7 @@
           </form>
           <div class="cart">
             <a href="/basket" class="btn btn-default btn-block">
-              <span class="hidden-xs">Корзина</span> <img src="/img/shopping-cart.png"> <span class="badge">0</span>
+              <span class="hidden-xs">Корзина</span> <img src="/img/shopping-cart.png"> <span class="badge" id="count-items">0</span>
             </a>
           </div>
           <div class="lang">

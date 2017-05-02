@@ -20,20 +20,31 @@
         <thead>
           <tr class="active">
             <td>Название</td>
-            <td>Картинка</td>
             <td>Цена</td>
             <td>Количество</td>
-            <td class="text-right">Сумма</td>
+            <td>Сумма</td>
+            <td class="text-right">Функции</td>
           </tr>
         </thead>
         <tbody>
           @forelse ($products as $product)
             <tr>
-              <td>{{ $product->title }}</td>
-              <td><img src="/img/products/{{ $product->path.'/'.$product->image }}" class="img-responsive" style="width:80px;height:80px;"></td>
+              <td>
+                <img src="/img/products/{{ $product->path.'/'.$product->image }}" style="width:80px;height:80px;">
+                {{ $product->title }}
+              </td>
               <td>{{ $product->price }}</td>
-              <td>{{ $product->count }}</td>
+              <td><input type="number" class="form-control" name="count" value="1"></td>
               <td>{{ $product->sum }}</td>
+              <td class="text-right">
+                <form method="POST" action="/basket/{{ $product->id }}" accept-charset="UTF-8" class="btn-delete">
+                  <input name="_method" type="hidden" value="DELETE">
+                  <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-link btn-xs" onclick="return confirm('Удалить запись?')">
+                    <img src="/img/close.png" >
+                  </button>
+                </form>
+              </td>
             </tr>
           @empty
             <tr>
@@ -42,6 +53,13 @@
           @endforelse
         </tbody>
       </table>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>Итого: <b>{{ $products->sum('price') }} ₸</b></p>
+        <a href="/order" class="btn btn-primary text-uppercase">Оформить заказ</a>
+      </div>
     </div>
   </div>
 
