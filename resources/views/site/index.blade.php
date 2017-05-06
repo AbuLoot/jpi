@@ -24,30 +24,22 @@
     @foreach ($products->chunk(4) as $chunk)
       <div class="row">
         @foreach ($chunk as $product)
-          @if(is_array($items) AND in_array($product->id, $items['product_ids']))
-            <div class="col-md-3 col-sm-6 goods">
-              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
-                <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
-                <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
-              </a>
-              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" class="btn good-more">Подробнее</a>
+          <div class="col-md-3 col-sm-6 goods">
+            <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
+              <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
+              <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
+            </a>
+            <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" class="btn good-more">Подробнее</a>
+            @if(is_array($items) AND in_array($product->id, $items['products_id']))
               <a href="/basket" class="btn btn-cart" data-toggle="tooltip" data-placement="top" title="Перейти в корзину"><img src="/img/shopping-cart.png"></a>
-            </div>
-          @else
-            <div class="col-md-3 col-sm-6 goods">
-              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">
-                <p class="name-good">{{ $product->category->title.' '.$product->title }}</p>
-                <div class="good-img"><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></div>
-              </a>
-              <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" class="btn good-more">Подробнее</a>
+            @else
               <button class="btn btn-buy" id="add-to-cart" data-id="{{ $product->id }}" type="button">Купить</button>
-            </div>
-          @endif
+            @endif
+          </div>
         @endforeach
       </div>
     @endforeach
   </div>
-
 
   <div class="container-fluid partners"><!-- Партнеры -->
     <div class="container">

@@ -59,6 +59,7 @@
             <li @if (Request::is('admin/news', 'admin/news/*')) class="active" @endif> <a href="/admin/news"><i class="material-icons md-18">create</i> Новости</a> </li>
             <li @if (Request::is('admin/products', 'admin/products/*')) class="active" @endif> <a href="/admin/products"><i class="material-icons md-18">store</i> Продукты</a> </li>
             <li @if (Request::is('admin/options', 'admin/options/*')) class="active" @endif> <a href="/admin/options"><i class="material-icons md-18">label_outline</i> Опции</a> </li>
+            <li @if (Request::is('admin/orders', 'admin/orders/*')) class="active" @endif> <a href="/admin/orders"><i class="material-icons md-18">shopping_cart</i> Заказы</a> </li>
             <li @if (Request::is('admin/apps', 'admin/apps/*')) class="active" @endif> <a href="/admin/apps"><i class="material-icons md-18">send</i> Заявки</a> </li>
           </ul>
           <ul class="nav nav-sidebar">

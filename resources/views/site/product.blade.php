@@ -42,6 +42,12 @@
           <p>Штрих-код:  4903111210756</p>
           <p>Модель:  4-8кг 81шт</p>
         </div>
+        <?php $items = session('items'); ?>
+        @if(is_array($items) AND in_array($product->id, $items['products_id']))
+          <a href="/basket" class="btn btn-cart" data-toggle="tooltip" data-placement="top" title="Перейти в корзину"><img src="/img/shopping-cart.png"></a>
+        @else
+          <button class="btn btn-buy" id="add-to-cart" data-id="{{ $product->id }}" type="button">Купить</button>
+        @endif
         <h4>Описание</h4>
 
         {!! $product->description !!}
@@ -49,4 +55,35 @@
     </div>
   </div><!-- Товары -->
 
+@endsection
+
+@section('scripts')
+  <script>
+    $('button#add-to-cart').click(function(e){
+      e.preventDefault();
+
+      var productId = $(this).data("id");
+
+      if (productId != '') {
+        $.ajax({
+          type: "get",
+          url: '/cart/'+productId,
+          dataType: "json",
+          data: {},
+          success: function(data) {
+            console.log(data);
+            $('*[data-id="'+productId+'"]').replaceWith('<a href="/basket" class="btn btn-cart" data-toggle="tooltip" data-placement="top" title="Перейти в корзину"><img src="/img/shopping-cart.png"></a>');
+            $('#count-items').text(data.countItems);
+            alert('Товар добавлен в корзину');
+          }
+        });
+      } else {
+        alert("Ошибка сервера");
+      }
+    });
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
 @endsection

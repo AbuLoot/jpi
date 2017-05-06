@@ -27,11 +27,11 @@
           </tr>
         </thead>
         <tbody>
-          @forelse ($products as $product)
+          @foreach ($products as $product)
             <tr>
               <td>
                 <img src="/img/products/{{ $product->path.'/'.$product->image }}" style="width:80px;height:80px;">
-                {{ $product->title }}
+                <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}">{{ $product->title }}</a>
               </td>
               <td>{{ $product->price }}</td>
               <td><input type="number" class="form-control" name="count" value="1"></td>
@@ -46,21 +46,20 @@
                 </form>
               </td>
             </tr>
-          @empty
-            <tr>
-              <td colspan="5">Нет записи</td>
-            </tr>
-          @endforelse
+          @endforeach
         </tbody>
       </table>
     </div>
 
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p>Итого: <b>{{ $products->sum('price') }} ₸</b></p>
-        <a href="/order" class="btn btn-primary text-uppercase">Оформить заказ</a>
+    @if ($products->count() > 0)
+      <h4 class="text-right"><a href="/clear-cart">Очистить корзину?</a></h4>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>Итого: <b>{{ $products->sum('price') }} ₸</b></p>
+          <a href="/order" class="btn btn-primary text-uppercase">Оформить заказ</a>
+        </div>
       </div>
-    </div>
+    @endif
   </div>
 
 @endsection

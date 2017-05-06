@@ -18,15 +18,24 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
+            $table->string('address');
             $table->integer('count');
             $table->integer('price');
             $table->integer('amount');
             $table->integer('status')->default(1);
             $table->timestamps();
+        });
+
+        Schema::create('product_order', function (Blueprint $table) {
+            $table->integer('product_id')->unsigned();
+            $table->integer('order_id')->unsigned();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+            $table->primary(['product_id', 'order_id']);
         });
     }
 

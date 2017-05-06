@@ -20,6 +20,11 @@ class Product extends Model
 
     public function options()
     {
-        return $this->belongsToMany('App\Option', 'product_option', 'product_id', 'option_id');
+        return $this->belongsToMany('App\Option', 'product_option', 'product_id');
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany('App\Order', 'product_order', 'product_id');
     }
 }

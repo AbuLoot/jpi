@@ -54,9 +54,12 @@
             <input type="search" name="text" placeholder="Поиск по сайту" required="required">
             <input class="head-search-btn" type="submit" value="Искать">
           </form>
+          <?php $items = session('items'); ?>
           <div class="cart">
             <a href="/basket" class="btn btn-default btn-block">
-              <span class="hidden-xs">Корзина</span> <img src="/img/shopping-cart.png"> <span class="badge" id="count-items">0</span>
+              <span class="hidden-xs">Корзина</span>
+              <img src="/img/shopping-cart.png">
+              <span class="badge" id="count-items"><?php echo (is_array($items)) ? count($items['products_id']) : 0; ?></span>
             </a>
           </div>
           <div class="lang">
@@ -88,6 +91,8 @@
     @yield('header')
 
   </header>
+
+  @include('layouts.alerts')
 
   <!-- Контент -->
   @yield('content')

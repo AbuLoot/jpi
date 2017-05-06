@@ -56,7 +56,7 @@ class MainController extends Controller
     public function product($category_slug, $product_slug)
     {
         $page = Page::where('slug', 'catalog')->firstOrFail();
-        $product = Product::where('slug', $product_slug)->first();
+        $product = Product::where('slug', $product_slug)->firstOrFail();
 
         return view('site.product')->with(['page' => $page, 'product' => $product]);
     }

@@ -14,7 +14,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('news', 'Joystick\NewController');
     Route::resource('languages', 'Joystick\LanguageController');
     Route::resource('options', 'Joystick\OptionController');
-    Route::resource('orders', 'Joystick\OrdersController');
+    Route::resource('orders', 'Joystick\OrderController');
     Route::resource('pages', 'Joystick\PageController');
     Route::resource('products', 'Joystick\ProductController');
 
@@ -34,11 +34,15 @@ Route::get('search', 'InputController@search');
 
 Route::get('cart/{id}', 'InputController@addToCart');
 
-Route::get('cart', 'InputController@cart');
+Route::get('clear-cart', 'InputController@clearCart');
 
 Route::get('basket', 'InputController@basket');
 
 Route::delete('basket/{id}', 'InputController@destroy');
+
+Route::get('order', 'InputController@order');
+
+Route::post('order', 'InputController@storeOrder');
 
 Route::get('catalog', 'MainController@catalog');
 
