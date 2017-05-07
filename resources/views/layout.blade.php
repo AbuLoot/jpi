@@ -166,7 +166,7 @@
     <div class="container-fluid foooter-down">
       <div class="container">
         <p>Copyright © 2017 Japan Import</p>
-        <p class="creator">Cоздание сайта - <a href="artmedia.kz"><img src="/img/artmedia.png" alt=""></a></p>
+        <p class="creator">Cоздание сайта - <a href="https://vk.com/is.adilet">Исаев Адилет</a> и <a href="artmedia.kz"><img src="/img/artmedia.png" alt=""></a></p>
         <a href="#header" class="btn-up"></a>
       </div>
     </div>

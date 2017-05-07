@@ -1008,6 +1008,12 @@ footer .active a {text-decoration: underline;}
         right: 15px;
         width: 60px;
     }
+    .cart {
+        position: absolute;
+        top: -40px;
+        right: 15px;
+        width: 70px;
+    }
     .head-search {
         width: 90%;
         float: right;

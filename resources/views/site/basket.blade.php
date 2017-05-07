@@ -23,7 +23,7 @@
             <td>Цена</td>
             <td>Количество</td>
             <td>Сумма</td>
-            <td class="text-right">Функции</td>
+            <td class="text-right">Действие</td>
           </tr>
         </thead>
         <tbody>
