@@ -72,6 +72,9 @@ class InputController extends Controller
             $products = Product::whereIn('id', $items['products_id'])->get();
 
         }
+        else {
+            $products = collect();
+        }
 
         return view('site.basket', compact('products'));
     }

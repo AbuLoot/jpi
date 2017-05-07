@@ -27,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($products as $product)
+          @forelse ($products as $product)
             <tr>
               <td>
                 <img src="/img/products/{{ $product->path.'/'.$product->image }}" style="width:80px;height:80px;">
@@ -46,7 +46,11 @@
                 </form>
               </td>
             </tr>
-          @endforeach
+          @empty
+            <tr>
+              <td colspan="5"></td>
+            </tr>
+          @endforelse
         </tbody>
       </table>
     </div>
