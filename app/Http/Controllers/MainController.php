@@ -17,9 +17,10 @@ class MainController extends Controller
 {
     public function index()
     {
+        $page = Page::firstOrFail();
     	$products = Product::where('status', 1)->take(8)->get();
 
-        return view('site.index')->with('products', $products);
+        return view('site.index')->with(['page' => $page, 'products' => $products]);
     }
 
     public function page($slug)
