@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title_description', $page->title_description)
+
+@section('meta_description', $page->meta_description)
+
 @section('header')
   <!-- Навигация -->
   <div class="slogan">
