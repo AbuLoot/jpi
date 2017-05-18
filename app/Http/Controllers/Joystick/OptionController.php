@@ -40,9 +40,9 @@ class OptionController extends Controller
 
     public function edit($id)
     {
-        $options = Option::findOrFail($id);
+        $option = Option::findOrFail($id);
 
-        return view('joystick-admin.options.edit', compact('options'));
+        return view('joystick-admin.options.edit', compact('option'));
     }
 
     public function update(Request $request, $id)
