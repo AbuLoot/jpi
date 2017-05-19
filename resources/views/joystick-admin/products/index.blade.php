@@ -28,7 +28,7 @@
             <td><img src="/img/products/{{ $product->path.'/'.$product->image }}" class="img-responsive" style="width:80px;height:80px;"></td>
             <td>{{ $product->title }}</td>
             <td>{{ $product->category->title }}</td>
-            <td>{{ $product->company->title }}</td>
+            <td>{{ (isset($product->company->title)) ? $product->company->title : '' }}</td>
             <td>{{ $product->sort_id }}</td>
             <td>{{ $product->lang }}</td>
             @if ($product->status != 0)

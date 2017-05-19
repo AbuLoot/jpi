@@ -33,7 +33,16 @@
     </div>
     <div class="form-group">
       <label for="lang">Язык</label>
-      <input type="text" class="form-control" id="lang" name="lang" maxlength="255" value="{{ (old('lang')) ? old('lang') : '' }}">
+      <select id="lang" name="lang" class="form-control" required>
+        <option value=""></option>
+        @foreach($languages as $language)
+          @if (old('lang') == $language->slug)
+            <option value="{{ $language->slug }}" selected>{{ $language->title }}</option>
+          @else
+            <option value="{{ $language->slug }}">{{ $language->title }}</option>
+          @endif
+        @endforeach
+      </select>
     </div>
     <div class="form-group">
       <label for="status">Статус:</label>
