@@ -19,6 +19,10 @@
       <input type="text" class="form-control" id="slug" name="slug" minlength="2" maxlength="80" value="{{ (old('slug')) ? old('slug') : '' }}">
     </div>
     <div class="form-group">
+      <label for="sort_id">Номер</label>
+      <input type="text" class="form-control" id="sort_id" name="sort_id" maxlength="5" value="{{ (old('sort_id')) ? old('sort_id') : NULL }}">
+    </div>
+    <div class="form-group">
       <label for="category_id">Категории</label>
       <select id="category_id" name="category_id" class="form-control">
         <option value=""></option>
