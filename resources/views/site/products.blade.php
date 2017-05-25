@@ -32,13 +32,13 @@
                 <div class="good-img"><span><img src="/img/products/{{ $product->path.'/'.$product->image }}" alt="{{ $product->title }}"></span></div>
                 <div class="info">
                   <p class="price">{{ $product->price }} тг.</p>
-                  <p class="good-name">{{ $product->company->title }} <span>/ {{ $product->title }}</span></p>
+                  <p class="good-name">{{ (isset($product->company->title)) ? $product->company->title : '' }} <span>/ {{ $product->title }}</span></p>
                 </div>
                 <div class="hide-name">
                   <div class="hide-name-text">
                     <div class="info">
                       <p class="price">{{ $product->price }} тг.</p>
-                      <p class="good-name">{{ $product->company->title }} <span>/ {{ $product->title }}</span></p>
+                      <p class="good-name">{{ (isset($product->company->title)) ? $product->company->title : '' }} <span>/ {{ $product->title }}</span></p>
                     </div>
                   </div><br>
                   <a href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" class="btn good-more">Подробнее</a>
