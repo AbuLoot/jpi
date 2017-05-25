@@ -113,7 +113,7 @@ class MainController extends Controller
                    "Content-type: text/html; charset=UTF-8" . "\r\n";
 
         // Send the email.
-        if (mail('issayev.adilet@gmail.com', $subject, $content, $headers)) {
+        if (mail('jtalmaty@gmail.com, issayev.adilet@gmail.com', $subject, $content, $headers)) {
             $status = 'alert-success';
             $message = 'Ваша заявка принято.';
         }
