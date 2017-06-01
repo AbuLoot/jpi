@@ -42,8 +42,6 @@ Route::get('basket/{id}', 'InputController@destroy');
 
 // Order and Payment
 
-Route::get('order', 'InputController@order');
-
 Route::post('store-order', 'InputController@storeOrder');
 
 Route::get('payment', 'EpayController@payment');

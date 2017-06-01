@@ -21,8 +21,8 @@
         <form class="form-horizontal" name="SendOrder" method="post" action="https://epay.kkb.kz/jsp/process/logon.jsp">
           <input type="hidden" name="Signed_Order_B64" value="{{ $content }}">
           <input type="hidden" name="Language" value="rus"> <!-- язык формы оплаты rus/eng -->
-          <input type="hidden" name="BackLink" value="http://localhost:8000/payment">
-          <input type="hidden" name="PostLink" value="http://localhost:8000/postlink">
+          <input type="hidden" name="BackLink" value="http://jpi.kz/payment">
+          <input type="hidden" name="PostLink" value="http://jpi.kz/postlink">
 
           <div class="table-responsive">
             <table class="table table-striped table-condensed">

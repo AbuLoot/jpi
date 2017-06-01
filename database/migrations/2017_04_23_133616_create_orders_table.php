@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
             $table->string('address');
-            $table->integer('count');
+            $table->string('count');
             $table->integer('price');
             $table->integer('amount');
             $table->integer('status')->default(1);
