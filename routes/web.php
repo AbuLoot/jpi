@@ -38,11 +38,20 @@ Route::get('clear-cart', 'InputController@clearCart');
 
 Route::get('basket', 'InputController@basket');
 
-Route::delete('basket/{id}', 'InputController@destroy');
+Route::get('basket/{id}', 'InputController@destroy');
+
+// Order and Payment
 
 Route::get('order', 'InputController@order');
 
-Route::post('order', 'InputController@storeOrder');
+Route::post('store-order', 'InputController@storeOrder');
+
+Route::get('payment', 'EpayController@payment');
+
+Route::get('postlink', 'EpayController@postlink');
+
+
+// Pages
 
 Route::get('catalog', 'MainController@catalog');
 

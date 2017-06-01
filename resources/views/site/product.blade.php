@@ -11,10 +11,10 @@
 
   <div class="container breadcrums">
     <ul>
-      <li><a href="index.html">Главная</a></li>
-      <li><a href="catalog.html">Наши товары</a></li>
-      <li><a href="catalog-1.html">Подгузники</a></li>
-      <li><a href="#">ПОДГУЗНИКИ MOONY S 81 (4-8 КГ)</a></li>
+      <li><a href="/">Главная</a></li>
+      <li><a href="/catalog">Наши товары</a></li>
+      <li><a href="/catalog/{{ $product->category->slug }}">{{ $product->category->title }}</a></li>
+      <li><a href="#">{{ $product->title }}</a></li>
     </ul>
   </div>
   <div class="container"><!-- Товары -->
@@ -41,6 +41,7 @@
           <p>Производитель:  Moony (Япония)</p>
           <p>Штрих-код:  4903111210756</p>
           <p>Модель:  4-8кг 81шт</p>
+          <p>Цена:  {{ $product->price }} тг.</p>
         </div>
         <?php $items = session('items'); ?>
         @if(is_array($items) AND in_array($product->id, $items['products_id']))

@@ -9,27 +9,13 @@ use App\Http\Controllers\Controller;
 
 class EpayController extends Controller
 {
-	public function test()
-	{
-		return view('epay::epay');
-	}
-
     public function index($amount)
     {
-	    if (intval($amount)>0) {
+	    if (intval($amount) > 0) {
+
 			$path = __DIR__.'/paysys/kkb.utils.php';
 
-
 	        \File::requireOnce($path);
-
-                MERCHANT_CERTIFICATE_ID = "c183e3a7"                ; Серийный номер сертификата Cert Serial Number
-                MERCHANT_NAME = "Japan Import"              ; Название магазина (продавца) Shop/merchant Name
-                PRIVATE_KEY_FN = "../paysys/cert.prv"               ; Путь к закрытому ключу Private cert path
-                PRIVATE_KEY_PASS = "WDfUveEf9i3"                    ; Пароль к закрытому ключу Private cert password
-                XML_TEMPLATE_FN = "../paysys/template.xml"          ; Путь к XML шаблону XML template path
-                XML_COMMAND_TEMPLATE_FN = "../paysys/command_template.xml"  ; Путь к XML шаблону для команд (возврат/подтверждение) 
-                PUBLIC_KEY_FN = "../paysys/kkbca.pem"               ; Путь к открытому ключу Public cert path
-                MERCHANT_ID = "92098431"                      ; Терминал ИД в банковской Системе
 
 	       	$path1 = [
 	            'MERCHANT_CERTIFICATE_ID' => '00C182B189',
@@ -43,14 +29,14 @@ class EpayController extends Controller
 	        ];
 
 			$user = Auth::user();
-	        $currency_id = "398"; // Øèôð âàëþòû  - 840-USD, 398-Tenge
-	        $payment = new Payment;
-	        $payment->user_id = Auth::user()->id;
-	        $payment->amount = $amount;
-			$payment->status="0";
-	        $payment->operation_id = 1;
-	        $payment->save();
-	        $content = process_request($payment->id,$currency_id, intval($payment->amount), $path1); // Âîçâðàùàåò ïîäïèñàííûé è base64 êîäèðîâàííûé XML äîêóìåíò äëÿ îòïðàâêè â áàíê
+	        $currency_id = "398"; // ID валюты. - 840-USD, 398-Tenge
+	        $order = new Order;
+	        $order->user_id = Auth::user()->id;
+	        $order->amount = $amount;
+			$order->status="0";
+	        $order->operation_id = 1;
+	        $order->save();
+	        $content = process_request($order->id,$currency_id, intval($order->amount), $path1); // Âîçâðàùàåò ïîäïèñàííûé è base64 êîäèðîâàííûé XML äîêóìåíò äëÿ îòïðàâêè â áàíê
 	        return view('epay.index', compact('user', 'content'));
 		}
     }
