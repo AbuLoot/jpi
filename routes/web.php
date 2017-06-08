@@ -44,9 +44,9 @@ Route::get('basket/{id}', 'InputController@destroy');
 
 Route::post('store-order', 'InputController@storeOrder');
 
-Route::get('payment', 'EpayController@payment');
+Route::get('payment', 'InputController@payment');
 
-Route::get('postlink', 'EpayController@postlink');
+Route::get('postlink', 'InputController@postlink');
 
 
 // Pages

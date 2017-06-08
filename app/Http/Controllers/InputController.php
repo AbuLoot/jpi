@@ -102,7 +102,7 @@ class InputController extends Controller
     public function storeOrder(Request $request)
     {
         $currency_id = "398"; // ID валюты. - 840-USD, 398-Tenge
-        $path = __DIR__.'/Epay/paysys/kkb.utils.php';
+        $path = __DIR__.'/Epay/jpi_paysys/kkb.utils.php';
         $path1 = __DIR__.'/Epay/jpi_paysys/config.txt';
 
         \File::requireOnce($path);
@@ -147,6 +147,47 @@ class InputController extends Controller
 
         return view('site.pay', compact('order', 'content'));
         // return redirect('/')->with('status', 'Заказ принят!');
+    }
+
+    public function payment()
+    {
+        // Session::forget('items');
+        return 'Платеж выполнен успешно! <a href="/">Вернуться на сайт.</a>';
+    }
+
+    public function postlink()
+    {
+        $path = __DIR__.'/Epay/jpi_paysys/kkb.utils.php';
+        $path1 = __DIR__.'/Epay/jpi_paysys/config.txt';
+
+        \File::requireOnce($path);
+
+        $result = 0;
+        if (isset($_POST["response"])){
+            $response = $_POST["response"];
+        }
+
+        $result = process_response(stripslashes($response), $path1);
+
+        Session::set('result', $result);
+
+        //foreach ($result as $key => $value) {echo $key." = ".$value."<br>";}
+        if (is_array($result)){
+            if (in_array("ERROR",$result)){
+                if ($result["ERROR_TYPE"]=="ERROR"){
+                    echo "System error:".$result["ERROR"];
+                } elseif ($result["ERROR_TYPE"]=="system"){
+                    echo "Bank system error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
+                }elseif ($result["ERROR_TYPE"]=="auth"){
+                    echo "Bank system user autentication error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
+                }
+            }
+            if (in_array("DOCUMENT",$result)){
+                echo "Result DATA: <BR>";
+                foreach ($result as $key => $value) {echo "Postlink Result: ".$key." = ".$value."<br>";}
+            }
+        } else { echo "System error".$result; }
+        //return view('epay.paytest.postlink');
     }
 
     public function destroy($id)

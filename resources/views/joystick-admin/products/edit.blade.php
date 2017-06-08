@@ -127,7 +127,9 @@
                 <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
                 <input type="file" name="images[]" accept="image/*">
               </span>
-              <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
+              <label>
+                <input type="checkbox" name="remove_images[]" value="{{ $i }}"> Удалить
+              </label>
             </div>
           </div>
         @else
