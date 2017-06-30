@@ -58,6 +58,8 @@ class MainController extends Controller
     {
         $page = Page::where('slug', 'catalog')->firstOrFail();
         $product = Product::where('slug', $product_slug)->firstOrFail();
+        $product->views = $product->views + 1;
+        $product->save();
 
         return view('site.product')->with(['page' => $page, 'product' => $product]);
     }

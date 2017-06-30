@@ -17,6 +17,7 @@
           <td>Категория</td>
           <td>Компания</td>
           <td>Номер</td>
+          <td>Просмотров</td>
           <td>Язык</td>
           <td>Статус</td>
           <td class="text-right">Функции</td>
@@ -30,6 +31,7 @@
             <td>{{ $product->category->title }}</td>
             <td>{{ (isset($product->company->title)) ? $product->company->title : '' }}</td>
             <td>{{ $product->sort_id }}</td>
+            <td>{{ $product->views }}</td>
             <td>{{ $product->lang }}</td>
             @if ($product->status != 0)
               <td class="text-success">Активен</td>

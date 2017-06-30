@@ -64,13 +64,13 @@
     <div class="form-group">
       <label for="days">Срок доставки</label>
       <div class="input-group">
-        <input type="text" class="form-control" id="days" name="days" maxlength="10" value="{{ (old('days')) ? old('days') : $product->days}}">
+        <input type="text" class="form-control" id="days" name="days" maxlength="10" value="{{ (old('days')) ? old('days') : $product->days }}">
         <div class="input-group-addon">дней</div>
       </div>
     </div>
     <div class="form-group">
       <label for="count">Количество товара</label>
-      <input type="number" class="form-control" id="count" name="count" minlength="5" maxlength="80" value="{{ (old('count')) ? old('count') : 0 }}">
+      <input type="number" class="form-control" id="count" name="count" minlength="5" maxlength="80" value="{{ (old('count')) ? old('count') : $product->count }}">
     </div>
     <div class="form-group">
       <label for="condition">Состояние товара</label>
@@ -146,6 +146,10 @@
           </div>
         @endif
       @endfor
+    </div>
+    <div class="form-group">
+      <label for="views">Просмотров товара</label>
+      <input type="number" class="form-control" id="views" name="views" minlength="5" maxlength="80" value="{{ $product->views }}" disabled>
     </div>
     <div class="form-group">
       <label for="mode">Режим</label>

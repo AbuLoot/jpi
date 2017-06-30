@@ -56,8 +56,6 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
 
-            $i = 0;
-
             foreach ($request->file('images') as $key => $image)
             {
                 if (isset($image)) {
@@ -65,8 +63,7 @@ class ProductController extends Controller
                     $imageName = 'image-'.$key.uniqid().'-'.str_slug($request->title).'.'.$image->getClientOriginalExtension();
 
                     // Creating preview image
-                    if ($i == 0) {
-                        $i++;
+                    if ($key == 0) {
                         $this->resizeImage($image, 200, 200, 'img/products/'.$dirName.'/preview-'.$imageName, 100);
                         $introImage = 'preview-'.$imageName;
                     }
@@ -140,11 +137,9 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        $introImage = null;
         $images = unserialize($product->images);
 
         if ($request->hasFile('images')) {
-            $i = 0;
             $introImage = null;
             $images = unserialize($product->images);
 
@@ -159,11 +154,10 @@ class ProductController extends Controller
                     $imageName = 'image-'.$key.uniqid().'-'.str_slug($request->title).'.'.$image->getClientOriginalExtension();
 
                     // Creating preview image
-                    if ($i == 0) {
+                    if ($key == 0) {
                         if ($product->image != NULL AND file_exists('img/products/'.$product->path.'/'.$product->image)) {
                             Storage::delete('img/products/'.$product->path.'/'.$product->image);
                         }
-                        $i++;
                         $this->resizeImage($image, 200, 200, 'img/products/'.$product->path.'/preview-'.$imageName, 100);
                         $introImage = 'preview-'.$imageName;
                     }
@@ -238,10 +232,8 @@ class ProductController extends Controller
         $product->meta_description = $request->meta_description;
         $product->description = $request->description;
         $product->characteristic = $request->characteristic;
-
         if (isset($introImage)) $introImage;
-        if (isset($images)) $product->images = serialize($images);
-
+        $product->images = serialize($images);
         $product->lang = $request->lang;
         $product->mode = $request->mode;
         $product->status = ($request->status == 'on') ? 1 : 0;
