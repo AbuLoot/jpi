@@ -32,15 +32,30 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required|min:2|max:80',
+            'name' => 'required|min:2|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|min:5',
+            'city_id' => 'numeric',
+            'address' => 'required',
         ]);
 
         $order = Order::findOrFail($id);
-        $order->sort_id = ($request->sort_id > 0) ? $request->sort_id : $order->count() + 1;
-        $order->slug = (empty($request->slug)) ? str_slug($request->title) : $request->slug;
-        $order->title = $request->title;
-        $order->data = $request->data;
-        $order->lang = $request->lang;
+        // $order->name = $request->name;
+        // $order->email = $request->email;
+        // $order->phone = $request->phone;
+        // $order->company_name = $request->company_name;
+        // $order->data_1 = $request->data_1;
+        // $order->data_2 = $request->data_2;
+        // $order->data_3 = $request->data_3;
+        // $order->legal_address = $request->legal_address;
+        $order->address = $request->address;
+        // $order->city_id = ($request->city_id) ? $request->city_id : 0;
+        // $order->delivery = trans('orders.get.'.$request->delivery);
+        // $order->payment_type = trans('orders.pay.'.$request->payment_type);
+        // $order->count = serialize($request->count);
+        // $order->price = $products->sum('price');
+        // $order->amount = $sumPriceProducts;
+        $order->status = $request->status;
         $order->save();
 
         return redirect('/admin/orders')->with('status', 'Запись обновлена!');

@@ -6,37 +6,91 @@
   @include('joystick-admin.partials.alerts')
 
   <p class="text-right">
-    <a href="/admin/options" class="btn btn-primary btn-sm">Назад</a>
+    <a href="/admin/orders" class="btn btn-primary btn-sm">Назад</a>
   </p>
-  <form action="{{ route('options.update', $option->id) }}" method="post">
+  <form action="{{ route('orders.update', $order->id) }}" method="post">
     <input type="hidden" name="_method" value="PUT">
     {!! csrf_field() !!}
 
     <div class="form-group">
-      <label for="title">Название</label>
-      <input type="text" class="form-control" id="title" name="title" maxlength="80" value="{{ (old('title')) ? old('title') : $option->title }}" required>
+      <label for="name">Имя:</label>
+      <input type="text" class="form-control" name="name" id="name" minlength="2" maxlength="60" value="{{ $order->name }}" required>
     </div>
     <div class="form-group">
-      <label for="slug">Slug</label>
-      <input type="text" class="form-control" id="slug" name="slug" maxlength="80" value="{{ (old('slug')) ? old('slug') : $option->slug }}">
+      <label for="phone">Номера телефона</label>
+      <input type="text" class="form-control" id="phone" name="phone" value="{{ (old('phone')) ? old('phone') : $order->phone }}">
     </div>
     <div class="form-group">
-      <label for="sort_id">Номер</label>
-      <input type="text" class="form-control" id="sort_id" name="sort_id" value="{{ (old('sort_id')) ? old('sort_id') : $option->sort_id }}">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" minlength="8" maxlength="60" value="{{ $order->email }}" required>
     </div>
     <div class="form-group">
-      <label for="data">Данные</label>
-      <input type="text" class="form-control" id="data" name="data" value="{{ (old('data')) ? old('data') : $option->data }}">
-    </div>
-    <div class="form-group">
-      <label for="lang">Язык</label>
-      <select id="lang" name="lang" class="form-control" required>
+      <label for="countries">Страны</label>
+      <select id="country_id" name="country_id" class="form-control">
         <option value=""></option>
-        @foreach($languages as $language)
-          @if ($option->lang == $language->slug)
-            <option value="{{ $language->slug }}" selected>{{ $language->title }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="address">Адрес</label>
+      <input type="text" class="form-control" id="address" name="address" value="{{ (old('address')) ? old('address') : $order->address }}">
+    </div>
+    <div class="form-group">
+      <label for="count">Количество товаров</label><br>
+      <?php $countAllProducts = unserialize($order->count); ?>
+      <?php $i = 0; $c = 0; ?>
+      @foreach ($countAllProducts as $id => $countProduct)
+        @if ($order->products[$i]->id == $id)
+          <img src="/img/products/{{ $order->products[$i]->path.'/'.$order->products[$i]->image }}" style="width:80px;height:80px;">
+          {{ $countProduct . ' шт. ' }} <a href="/goods/{{ $order->products[$i]->id.'/'.$order->products[$i]->slug }}">{{ $order->products[$i]->title }}</a><br><br>
+        @endif
+        <?php $c += $countProduct; ?>
+        <?php $i++; ?>
+      @endforeach
+      <p>Общее количество товаров: {{ $c }} шт.</p>
+    </div>
+    <div class="form-group">
+      <label for="price">Цена</label>
+      <input type="text" class="form-control" id="price" name="price" value="{{ (old('price')) ? old('price') : $order->price }} 〒">
+    </div>
+    <div class="form-group">
+      <label for="amount">Сумма</label>
+      <input type="text" class="form-control" id="amount" name="amount" value="{{ (old('amount')) ? old('amount') : $order->amount }} 〒">
+    </div>
+    <div class="form-group">
+      <label for="delivery">Способ доставки:</label>
+      <select id="delivery" name="delivery" class="form-control">
+        <option value=""></option>
+        @foreach(trans('orders.get') as $key => $id)
+          @if ($id == $order->delivery)
+            <option value="{{ $key }}" selected>{{ $key }}</option>
           @else
-            <option value="{{ $language->slug }}">{{ $language->title }}</option>
+            <option value="{{ $key }}">{{ $key }}</option>
+          @endif
+        @endforeach
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="payment_type">Способ оплаты:</label>
+      <select id="payment_type" name="payment_type" class="form-control">
+        <option value=""></option>
+        @foreach(trans('orders.pay') as $key => $id)
+          @if ($id == $order->payment_type)
+            <option value="{{ $key }}" selected>{{ $key }}</option>
+          @else
+            <option value="{{ $key }}">{{ $key }}</option>
+          @endif
+        @endforeach
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="status">Статус:</label>
+      <select id="status" name="status" class="form-control" required>
+        <option value=""></option>
+        @foreach(trans('orders.statuses') as $key => $title)
+          @if ($key == $order->status)
+            <option value="{{ $key }}" selected>{{ $title }}</option>
+          @else
+            <option value="{{ $key }}">{{ $title }}</option>
           @endif
         @endforeach
       </select>
