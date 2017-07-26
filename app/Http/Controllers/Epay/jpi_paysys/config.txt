@@ -1,8 +1,8 @@
-MERCHANT_CERTIFICATE_ID = "c183e3a7"				; Серийный номер сертификата Cert Serial Number
-MERCHANT_NAME = "Japan Import"				; Название магазина (продавца) Shop/merchant Name
+MERCHANT_CERTIFICATE_ID = "c183e4c1"				; Серийный номер сертификата Cert Serial Number
+MERCHANT_NAME = "www.jpi.kz"				; Название магазина (продавца) Shop/merchant Name
 PRIVATE_KEY_FN = "/home/abuloot/Sites/jpi/app/Http/Controllers/Epay/jpi_paysys/cert.prv"				; Путь к закрытому ключу Private cert path
 PRIVATE_KEY_PASS = "WDfUveEf9i3"					; Пароль к закрытому ключу Private cert password
 XML_TEMPLATE_FN = "/home/abuloot/Sites/jpi/app/Http/Controllers/Epay/paysys/template.xml"			; Путь к XML шаблону XML template path
 XML_COMMAND_TEMPLATE_FN = "/home/abuloot/Sites/jpi/app/Http/Controllers/Epay/paysys/command_template.xml"	; Путь к XML шаблону для команд (возврат/подтверждение) 
 PUBLIC_KEY_FN = "/home/abuloot/Sites/jpi/app/Http/Controllers/Epay/jpi_paysys/kkbca.pem"				; Путь к открытому ключу Public cert path
-MERCHANT_ID="92098431"						; Терминал ИД в банковской Системе
+MERCHANT_ID="92327703"						; Терминал ИД в банковской Системе

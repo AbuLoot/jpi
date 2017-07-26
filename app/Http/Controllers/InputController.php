@@ -102,7 +102,7 @@ class InputController extends Controller
     public function storeOrder(Request $request)
     {
         $currency_id = "398"; // ID валюты. - 840-USD, 398-Tenge
-        $path = __DIR__.'/Epay/jpi_paysys/kkb.utils.php';
+        $path = __DIR__.'/Epay/paysys/kkb.utils.php';
         $path1 = __DIR__.'/Epay/jpi_paysys/config.txt';
 
         \File::requireOnce($path);
@@ -157,7 +157,7 @@ class InputController extends Controller
 
     public function postlink()
     {
-        $path = __DIR__.'/Epay/jpi_paysys/kkb.utils.php';
+        $path = __DIR__.'/Epay/paysys/kkb.utils.php';
         $path1 = __DIR__.'/Epay/jpi_paysys/config.txt';
 
         \File::requireOnce($path);
@@ -199,5 +199,10 @@ class InputController extends Controller
         Session::set('items', $items);
 
         return redirect('basket');
+    }
+
+    public function pathDir()
+    {
+        return __DIR__;
     }
 }

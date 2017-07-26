@@ -1,6 +1,7 @@
 <?php
 
 Auth::routes();
+Route::get('path-dir', 'InputController@pathDir');
 
 // Joystick Administration
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
@@ -39,6 +40,7 @@ Route::get('clear-cart', 'InputController@clearCart');
 Route::get('basket', 'InputController@basket');
 
 Route::get('basket/{id}', 'InputController@destroy');
+
 
 // Order and Payment
 
