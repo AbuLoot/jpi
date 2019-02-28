@@ -9,6 +9,7 @@ use Validator;
 use App\App;
 use App\News;
 use App\Page;
+use App\Slide;
 use App\Product;
 use App\Company;
 use App\Category;
@@ -18,9 +19,10 @@ class MainController extends Controller
     public function index()
     {
         $page = Page::firstOrFail();
+        $slide_items = Slide::where('status', 1)->take(10)->get();
     	$products = Product::where('status', 1)->orderBy('sort_id')->take(8)->get();
 
-        return view('site.index')->with(['page' => $page, 'products' => $products]);
+        return view('site.index')->with(['page' => $page, 'slide_items' => $slide_items, 'products' => $products]);
     }
 
     public function page($slug)

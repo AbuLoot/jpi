@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Joystick Admin</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Joystick Admin">
+    <meta name="author" content="issayev.adilet@gmail.com">
+    <link rel="icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/joystick/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,32 +33,36 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand text-uppercase" href="/admin"><i class="material-icons text-primary">gamepad</i> <b>Joystick Admin</b></a>
+          <a class="navbar-brand text-uppercase" href="/admin"><i class="material-icons text-primary">gamepad</i> <b>Joystick</b></a>
         </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              <i class="material-icons md-18">person_outline</i> {{ Auth::user()->name }} <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Выйти</a></li>
-            </ul>
-          </li>
-        </ul>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <i class="material-icons md-18">person_outline</i> {{ Auth::user()->name }} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ url('/logout') }}">Выйти</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-3 col-md-2 sidebar" id="navbar">
           <ul class="nav nav-sidebar">
             <li class="sidebar-title">Главное</li>
             <li @if (Request::is('admin/pages', 'admin/pages/*')) class="active" @endif> <a href="/admin/pages"><i class="material-icons md-18">content_copy</i> Страницы</a> </li>
-            <li @if (Request::is('admin/categories', 'admin/categories/*')) class="active" @endif> <a href="/admin/categories"><i class="material-icons md-18">list</i> Категории</a> </li>
+            <li @if (Request::is('admin/section', 'admin/section/*')) class="active" @endif> <a href="/admin/section"><i class="material-icons md-18">dashboard</i> Секции</a> </li>
             <li @if (Request::is('admin/news', 'admin/news/*')) class="active" @endif> <a href="/admin/news"><i class="material-icons md-18">create</i> Новости</a> </li>
+            <li @if (Request::is('admin/categories', 'admin/categories/*')) class="active" @endif> <a href="/admin/categories"><i class="material-icons md-18">list</i> Категории</a> </li>
             <li @if (Request::is('admin/products', 'admin/products/*')) class="active" @endif> <a href="/admin/products"><i class="material-icons md-18">store</i> Продукты</a> </li>
+            <li @if (Request::is('admin/slide', 'admin/slide/*')) class="active" @endif> <a href="/admin/slide"><i class="material-icons md-18">collections</i> Слайд</a> </li>
+            <!-- <li @if (Request::is('admin/modes', 'admin/modes/*')) class="active" @endif> <a href="/admin/modes"><i class="material-icons md-18">style</i> Режимы</a> </li> -->
             <li @if (Request::is('admin/options', 'admin/options/*')) class="active" @endif> <a href="/admin/options"><i class="material-icons md-18">label_outline</i> Опции</a> </li>
             <li @if (Request::is('admin/orders', 'admin/orders/*')) class="active" @endif> <a href="/admin/orders"><i class="material-icons md-18">shopping_cart</i> Заказы</a> </li>
             <li @if (Request::is('admin/apps', 'admin/apps/*')) class="active" @endif> <a href="/admin/apps"><i class="material-icons md-18">send</i> Заявки</a> </li>
@@ -71,6 +76,15 @@
             <li @if (Request::is('admin/users', 'admin/users/*')) class="active" @endif> <a href="/admin/users"><i class="material-icons md-18">people_outline</i> Пользователи</a> </li>
             <li @if (Request::is('admin/roles', 'admin/roles/*')) class="active" @endif> <a href="/admin/roles"><i class="material-icons md-18">accessibility</i> Роли</a> </li>
             <li @if (Request::is('admin/permissions', 'admin/permissions/*')) class="active" @endif> <a href="/admin/permissions"><i class="material-icons md-18">lock_open</i> Права доступа</a> </li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li>
+              <a href="{{ route('logout') }}"><i class="material-icons md-18">exit_to_app</i> Выйти</a>
+              <!-- onclick="event.preventDefault(); document.getElementById('logout-form').submit();" -->
+              <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> -->
+                <!-- {{ csrf_field() }} -->
+              <!-- </form> -->
+            </li>
           </ul>
         </div>
 

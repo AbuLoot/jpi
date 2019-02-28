@@ -11,6 +11,15 @@ body {
 .btn-delete {
   display: inline;
 }
+.checkbox-ids {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+}
+.dropdown-menu-category {
+  max-height: 500px;
+  overflow-y: auto;
+}
 /*
  * Global add-ons
  */

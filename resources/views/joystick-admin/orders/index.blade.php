@@ -10,6 +10,7 @@
       <thead>
         <tr class="active">
           <td>№</td>
+          <td>Дата</td>
           <td>Заказчик</td>
           <td>Телефон</td>
           <td>Email</td>
@@ -21,25 +22,24 @@
         </tr>
       </thead>
       <tbody>
-        <?php $i = 1; ?>
         @forelse ($orders as $order)
           <tr>
-            <td>{{ $i++ }}</td>
+            <td>{{ $order->id }}</td>
+            <td>{{ $order->created_at }}</td>
             <td>{{ $order->name }}</td>
             <td>{{ $order->phone }}</td>
             <td>{{ $order->email }}</td>
-            <td>{{ $order->city_id }}</td>
+            <td>{{ $order->city_id }}, {{ $order->address }}</td>
             <td>
-              <?php $countAllProducts = unserialize($order->count); ?>
-              <?php $i = 0; ?>
+              <?php $countAllProducts = unserialize($order->count); $i = 0; ?>
               @foreach ($countAllProducts as $id => $countProduct)
-                @if ($order->products[$i]->id == $id)
+                @if (isset($order->products[$i]) AND $order->products[$i]->id == $id)
                   {{ $countProduct . ' шт. ' . $order->products[$i]->title  }}<br>
                 @endif
                 <?php $i++; ?>
               @endforeach
             </td>
-            <td>{{ $order->amount }}</td>
+            <td class="text-nowrap">{{ $order->amount }}〒</td>
             <td>{{ trans('orders.statuses.'.$order->status) }}</td>
             <td class="text-right">
               <a class="btn btn-link btn-xs" href="{{ route('orders.edit', $order->id) }}" title="Редактировать"><i class="material-icons md-18">mode_edit</i></a>

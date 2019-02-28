@@ -9,6 +9,8 @@
         "intervention/image": "^2.3",
         "kalnoy/nestedset": "^4.2",
         "laravel/framework": "5.3.*",
+        "nicolaslopezj/searchable": "1.*",
+        "unisharp/laravel-filemanager": "~1.8",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {

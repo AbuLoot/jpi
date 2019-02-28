@@ -31,15 +31,21 @@
   </script>
 </head>
 <body>
-  <header id="header"><!-- Шапка -->
+  <?php
+    $data_1 = unserialize($part->data_1);
+    $data_2 = unserialize($part->data_2);
+    $data_3 = unserialize($part->data_3);
+    $phones = explode('/', $data_3['value']);
+  ?>
+  <header id="header">
     <div class="header-1">
       <div class="container">
-        <p class="head-address">г. Алматы, пр. Райымбека, 165 а, офис 7</p>
+        <p class="head-address">{{ $data_1['value'] }}</p>
         <span class="phones">
-          <a href="tel:+77272797271">+7 727 279 72 71</a>
-          <a href="tel:+77272797268">+7 727 279 72 68</a>
-          <a href="tel:+77011118045">+7 701 111 80 45</a>
-          <a href="tel:+77051118045">+7 705 111 80 45</a>
+          @foreach($phones as $phone)
+            <?php $href = str_replace(' ', '', $phone); ?>
+            <a href="tel:{{ $href }}">{{ $phone }}</a>
+          @endforeach
         </span>
         <p class="time">08:00 - 17:00</p>
       </div>
@@ -105,20 +111,20 @@
         <ul>
           <li>
             <p class="footer-add">Адрес:</p>
-            <p class="footer-add-1">г. Алматы, пр. Райымбека, 165 а, офис 7</p>
+            <p class="footer-add-1">{{ $data_1['value'] }}</p>
           </li>
           <li>
             <p class="footer-phone">Телефон:</p>
             <span class="footer-phone-1">
-              <a href="tel:+77272797271">+7 727 279 72 71</a>
-              <a href="tel:+77272797268">+7 727 279 72 68</a>
-              <a href="tel:+77011118045">+7 701 111 80 45</a>
-              <a href="tel:+77051118045">+7 705 111 80 45</a>
+              @foreach($phones as $phone)
+                <?php $href = str_replace(' ', '', $phone); ?>
+                <a href="tel:{{ $href }}">{{ $phone }}</a>
+              @endforeach
             </span>
           </li>
           <li>
-            <p class="footer-email">email:</p>
-            <a href="mailto:toojapantrade@bk.ru">toojapantrade@bk.ru</a>
+            <p class="footer-email">Email:</p>
+            <a href="mailto:{{ $data_2['value'] }}">{{ $data_2['value'] }}</a>
           </li>
           <li>
             <p class="schedule">График:</p>

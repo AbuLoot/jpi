@@ -15,8 +15,9 @@
 
   <!-- Модальное окно -->
   <div class="slider"><!-- Слайдер -->
-    <div><img src="img/slider.jpg" alt=""></div>
-    <div><img src="img/slider2.jpg" alt=""></div>
+    @foreach($slide_items as $slide_item)
+      <div><img src="/img/slide/{{ $slide_item->image }}" alt=""></div>
+    @endforeach
   </div>
 
   <!-- Модальное окно -->
