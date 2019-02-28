@@ -39,10 +39,6 @@
         <ul class="dropdown-menu" id="actions">
           <li><a data-action="active" href="#">Сделать активным</a></li>
           <li><a data-action="inactive" href="#">Сделать неактивым</a></li>
-          <li role="separator" class="divider"></li>
-          @foreach($modes as $mode)
-            <li><a data-action="{{ $mode->slug }}" href="#">Режим {{ $mode->title }}</a></li>
-          @endforeach
           <!-- <li><a data-action="destroy" href="#" onclick="return confirm('Удалить записи?')">Удалить</a></li> -->
         </ul>
       </div>
@@ -63,7 +59,6 @@
           <td>Компания</td>
           <td>Номер</td>
           <td>Язык</td>
-          <td>Режим</td>
           <td>Статус</td>
           <td class="text-right">Функции</td>
         </tr>
@@ -78,11 +73,7 @@
             <td>{{ (isset($product->company->title)) ? $product->company->title : '' }}</td>
             <td>{{ $product->sort_id }}</td>
             <td>{{ $product->lang }}</td>
-            <td>
-              @foreach ($product->modes as $mode)
-                {{ $mode->title }}<br>
-              @endforeach
-            </td>
+            <td>{{ trans('modes.'.$product->mode) }}</td>
             @if ($product->status != 0)
               <td class="text-success">Активен</td>
             @else

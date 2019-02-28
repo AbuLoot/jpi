@@ -35,6 +35,17 @@ class InputController extends Controller
         return view('site.found', compact('text', 'news', 'products'));
     }
 
+    public function searchAjax(Request $request)
+    {
+        $text = trim(strip_tags($request->text));
+
+        $products = Product::search($text)->get();
+
+        // return response()->json(view('site.products', ['products' => $products])->render());
+
+        return response()->json($products);
+    }
+
     public function clearCart()
     {
         Session::forget('items');
