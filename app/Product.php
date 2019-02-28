@@ -29,7 +29,6 @@ class Product extends Model
             'products.description' => 10,
             'products.characteristic' => 10,
             'products.barcode' => 5,
-            'products.oem' => 5,
         ]
     ];
 
