@@ -166,7 +166,7 @@
         </form>
         <a href="#" class="vk"></a>
         <a href="#" class="google"></a>
-        <a href="#" class="inst"></a>
+        <a href="https://www.instagram.com/momi.kazakhstan/?utm_source=ig_profile_share&igshid=16hxwojzg0p1m" class="inst"></a>
       </div>
     </div>
     <div class="container-fluid foooter-down">
