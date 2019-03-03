@@ -29,7 +29,7 @@
             <td>{{ $order->name }}</td>
             <td>{{ $order->phone }}</td>
             <td>{{ $order->email }}</td>
-            <td>{{ $order->city_id }}, {{ $order->address }}</td>
+            <td>@if(isset($order->city_id)) {{ $order->city->title }}, @endif {{ $order->address }}</td>
             <td>
               <?php $countAllProducts = unserialize($order->count); $i = 0; ?>
               @foreach ($countAllProducts as $id => $countProduct)

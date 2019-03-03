@@ -45,7 +45,7 @@
         @endif
         <?php $c += $countProduct; ?>
         <?php $i++; ?>
-      @endforeach
+      @endforeach  
       <p>Общее количество товаров: {{ $c }} шт.</p>
     </div>
     <div class="form-group">
