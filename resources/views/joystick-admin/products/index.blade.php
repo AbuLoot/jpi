@@ -57,6 +57,7 @@
           <td>Компания</td>
           <td>Номер</td>
           <td>Язык</td>
+          <td>Просмотры</td>
           <td>Статус</td>
           <td class="text-right">Функции</td>
         </tr>
@@ -71,6 +72,7 @@
             <td>{{ (isset($product->company->title)) ? $product->company->title : '' }}</td>
             <td>{{ $product->sort_id }}</td>
             <td>{{ $product->lang }}</td>
+            <td>{{ $product->views }}</td>
             <td class="text-info">{{ trans('statuses.data.'.$product->status) }}</td>
             <td class="text-right text-nowrap">
               <a class="btn btn-link btn-xs" href="/catalog/{{ $product->category->slug.'/'.$product->slug }}" title="Просмотр товара" target="_blank"><i class="material-icons md-18">link</i></a>

@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('slug');
             $table->string('title');
-            // $table->string('meta_description');
+            $table->string('meta_description');
             $table->integer('company_id');
             $table->integer('barcode')->nullable;
             $table->string('price');

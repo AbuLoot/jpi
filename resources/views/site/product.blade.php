@@ -38,9 +38,8 @@
       </div>
       <div class="goods-right">
         <div class="goods-right-name">
-          <p>Производитель:  Moony (Япония)</p>
-          <p>Штрих-код:  4903111210756</p>
-          <p>Модель:  4-8кг 81шт</p>
+          <p>Производитель:  {{ $product->company->title }}</p>
+          <!-- <p>Модель:  4-8кг 81шт</p> -->
           <p>Цена:  {{ $product->price }} тг.</p>
         </div>
         <?php $items = session('items'); ?>
